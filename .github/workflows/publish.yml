@@ -31,7 +31,8 @@ jobs:
 
       - name: Build package
         run: npm run build
-
+      - name: Bump version
+        run: npm version patch --no-git-tag-version
       - name: Publish to NPM
         run: npm publish --provenance --access public
         env:
