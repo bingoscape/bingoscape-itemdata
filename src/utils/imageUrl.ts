@@ -66,8 +66,8 @@ export function constructImageFilename(
  * @param itemName - The full item name (may include # postfix)
  * @returns The base filename without variant
  */
-export function constructBaseImageFilename(itemName: string): string {
-  return constructImageFilename(itemName);
+export function constructBaseImageFilename(itemName: string, includeInvariant: boolean = false): string {
+  return constructImageFilename(itemName, includeInvariant);
 }
 
 /**

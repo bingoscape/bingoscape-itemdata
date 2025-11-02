@@ -47,7 +47,7 @@ describe('constructImageFilename', () => {
   });
 
   test('converts # postfix to parentheses format', () => {
-    const filename = constructImageFilename('Amulet of glory#1');
+    const filename = constructImageFilename('Amulet of glory#1', true);
     expect(filename).toBe('Amulet_of_glory_%281%29_detail.png');
   });
 
@@ -57,34 +57,34 @@ describe('constructImageFilename', () => {
   });
 
   test('converts poison variant postfix to lowercase with encoded parentheses', () => {
-    const filename = constructImageFilename('Abyssal dagger#(p)');
+    const filename = constructImageFilename('Abyssal dagger#(p)', true);
     expect(filename).toBe('Abyssal_dagger_%28p%29_detail.png');
   });
 
   test('handles Corrupted scythe of vitur with Charged variant as lowercase in parentheses', () => {
-    const filename = constructImageFilename('Corrupted scythe of vitur#Charged');
+    const filename = constructImageFilename('Corrupted scythe of vitur#Charged', true);
     expect(filename).toBe('Corrupted_scythe_of_vitur_%28charged%29_detail.png');
   });
 
   test('handles Ahrim hood with damage state in parentheses', () => {
-    const filename = constructImageFilename("Ahrim's hood#100");
+    const filename = constructImageFilename("Ahrim's hood#100", true);
     expect(filename).toBe('Ahrim%27s_hood_%28100%29_detail.png');
   });
 
   test('handles Admiral pie with Full state in lowercase parentheses', () => {
-    const filename = constructImageFilename('Admiral pie#Full');
+    const filename = constructImageFilename('Admiral pie#Full', true);
     expect(filename).toBe('Admiral_pie_%28full%29_detail.png');
   });
 
   test('handles item with plus signs in poison variant', () => {
-    const filename = constructImageFilename('Adamant arrow#(p++)');
+    const filename = constructImageFilename('Adamant arrow#(p++)', true);
     expect(filename).toBe('Adamant_arrow_%28p%2B%2B%29_detail.png');
   });
 });
 
 describe('constructBaseImageFilename', () => {
   test('constructs base filename (same as regular since variants are removed)', () => {
-    const filename = constructBaseImageFilename('Amulet of glory#1');
+    const filename = constructBaseImageFilename('Amulet of glory#1', true);
     expect(filename).toBe('Amulet_of_glory_%281%29_detail.png');
   });
 });
@@ -114,14 +114,14 @@ describe('getItemImageUrl', () => {
   test('removes variant from URL', () => {
     const url = getItemImageUrl('Amulet of glory#1');
     expect(url).toBe(
-      'https://oldschool.runescape.wiki/images/thumb/Amulet_of_glory_%281%29_detail.png/120px-Amulet_of_glory_%281%29_detail.png'
+      'https://oldschool.runescape.wiki/images/thumb/Amulet_of_glory_detail.png/120px-Amulet_of_glory_detail.png'
     );
   });
 
   test('removes charged variant from Corrupted scythe', () => {
     const url = getItemImageUrl('Corrupted scythe of vitur#Charged');
     expect(url).toBe(
-      'https://oldschool.runescape.wiki/images/thumb/Corrupted_scythe_of_vitur_%28charged%29_detail.png/120px-Corrupted_scythe_of_vitur_%28charged%29_detail.png'
+      'https://oldschool.runescape.wiki/images/thumb/Corrupted_scythe_of_vitur_detail.png/120px-Corrupted_scythe_of_vitur_detail.png'
     );
   });
 });
@@ -129,7 +129,7 @@ describe('getItemImageUrl', () => {
 describe('getItemImageUrls', () => {
   test('returns same URL for both variant and base (since variants are removed)', () => {
     const urls = getItemImageUrls('Amulet of glory#1');
-    const expectedUrl = 'https://oldschool.runescape.wiki/images/thumb/Amulet_of_glory_%281%29_detail.png/120px-Amulet_of_glory_%281%29_detail.png';
+    const expectedUrl = 'https://oldschool.runescape.wiki/images/thumb/Amulet_of_glory_detail.png/120px-Amulet_of_glory_detail.png';
     expect(urls.variantUrl).toBe(expectedUrl);
     expect(urls.baseUrl).toBe(expectedUrl);
   });
