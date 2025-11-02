@@ -1,6 +1,6 @@
 {
   "name": "osrs-item-data",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "TypeScript package for parsing OSRS item IDs and names with icon images from the Old School RuneScape Wiki",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
