@@ -46,9 +46,9 @@ describe('constructImageFilename', () => {
     expect(filename).toBe('Abyssal_bludgeon_detail.png');
   });
 
-  test('removes # postfix from item name', () => {
+  test('converts # postfix to parentheses format', () => {
     const filename = constructImageFilename('Amulet of glory#1');
-    expect(filename).toBe('Amulet_of_glory_detail.png');
+    expect(filename).toBe('Amulet_of_glory_%281%29_detail.png');
   });
 
   test('handles item with apostrophes', () => {
@@ -56,36 +56,36 @@ describe('constructImageFilename', () => {
     expect(filename).toBe('%2724-carat%27_sword_detail.png');
   });
 
-  test('removes poison variant postfix', () => {
+  test('converts poison variant postfix to lowercase with encoded parentheses', () => {
     const filename = constructImageFilename('Abyssal dagger#(p)');
-    expect(filename).toBe('Abyssal_dagger_detail.png');
+    expect(filename).toBe('Abyssal_dagger_%28p%29_detail.png');
   });
 
-  test('handles Corrupted scythe of vitur with Charged variant removed', () => {
+  test('handles Corrupted scythe of vitur with Charged variant as lowercase in parentheses', () => {
     const filename = constructImageFilename('Corrupted scythe of vitur#Charged');
-    expect(filename).toBe('Corrupted_scythe_of_vitur_detail.png');
+    expect(filename).toBe('Corrupted_scythe_of_vitur_%28charged%29_detail.png');
   });
 
-  test('handles Ahrim hood with damage state removed', () => {
+  test('handles Ahrim hood with damage state in parentheses', () => {
     const filename = constructImageFilename("Ahrim's hood#100");
-    expect(filename).toBe('Ahrim%27s_hood_detail.png');
+    expect(filename).toBe('Ahrim%27s_hood_%28100%29_detail.png');
   });
 
-  test('handles Admiral pie with Full state removed', () => {
+  test('handles Admiral pie with Full state in lowercase parentheses', () => {
     const filename = constructImageFilename('Admiral pie#Full');
-    expect(filename).toBe('Admiral_pie_detail.png');
+    expect(filename).toBe('Admiral_pie_%28full%29_detail.png');
   });
 
-  test('handles item with plus signs', () => {
+  test('handles item with plus signs in poison variant', () => {
     const filename = constructImageFilename('Adamant arrow#(p++)');
-    expect(filename).toBe('Adamant_arrow_detail.png');
+    expect(filename).toBe('Adamant_arrow_%28p%2B%2B%29_detail.png');
   });
 });
 
 describe('constructBaseImageFilename', () => {
   test('constructs base filename (same as regular since variants are removed)', () => {
     const filename = constructBaseImageFilename('Amulet of glory#1');
-    expect(filename).toBe('Amulet_of_glory_detail.png');
+    expect(filename).toBe('Amulet_of_glory_%281%29_detail.png');
   });
 });
 
@@ -114,14 +114,14 @@ describe('getItemImageUrl', () => {
   test('removes variant from URL', () => {
     const url = getItemImageUrl('Amulet of glory#1');
     expect(url).toBe(
-      'https://oldschool.runescape.wiki/images/thumb/Amulet_of_glory_detail.png/120px-Amulet_of_glory_detail.png'
+      'https://oldschool.runescape.wiki/images/thumb/Amulet_of_glory_%281%29_detail.png/120px-Amulet_of_glory_%281%29_detail.png'
     );
   });
 
   test('removes charged variant from Corrupted scythe', () => {
     const url = getItemImageUrl('Corrupted scythe of vitur#Charged');
     expect(url).toBe(
-      'https://oldschool.runescape.wiki/images/thumb/Corrupted_scythe_of_vitur_detail.png/120px-Corrupted_scythe_of_vitur_detail.png'
+      'https://oldschool.runescape.wiki/images/thumb/Corrupted_scythe_of_vitur_%28charged%29_detail.png/120px-Corrupted_scythe_of_vitur_%28charged%29_detail.png'
     );
   });
 });
@@ -129,7 +129,7 @@ describe('getItemImageUrl', () => {
 describe('getItemImageUrls', () => {
   test('returns same URL for both variant and base (since variants are removed)', () => {
     const urls = getItemImageUrls('Amulet of glory#1');
-    const expectedUrl = 'https://oldschool.runescape.wiki/images/thumb/Amulet_of_glory_detail.png/120px-Amulet_of_glory_detail.png';
+    const expectedUrl = 'https://oldschool.runescape.wiki/images/thumb/Amulet_of_glory_%281%29_detail.png/120px-Amulet_of_glory_%281%29_detail.png';
     expect(urls.variantUrl).toBe(expectedUrl);
     expect(urls.baseUrl).toBe(expectedUrl);
   });

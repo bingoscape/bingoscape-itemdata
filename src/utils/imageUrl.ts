@@ -17,10 +17,25 @@ export function constructImageFilename(
 ): string {
   let name = itemName.trim();
 
-  // Handle # postfix - always remove it for URL generation
+  // Handle # postfix - convert to (variant) format for URL generation
+  // Example: "Holy scythe#Charged" -> "Holy scythe (Charged)"
+  // Example: "Absorption#(1)" -> "Absorption (1)"
   if (name.includes('#')) {
-    const [baseName] = name.split('#');
-    name = baseName.trim();
+    const [baseName, variant] = name.split('#');
+    const trimmedBase = baseName.trim();
+    const trimmedVariant = variant?.trim();
+
+    if (trimmedVariant) {
+      // Convert variant to lowercase for URL
+      const lowerVariant = trimmedVariant.toLowerCase();
+      // Add parentheses around variant (unless already has them)
+      const hasParens = lowerVariant.startsWith('(') && lowerVariant.endsWith(')');
+      name = hasParens
+        ? `${trimmedBase} ${lowerVariant}`
+        : `${trimmedBase} (${lowerVariant})`;
+    } else {
+      name = trimmedBase;
+    }
   }
 
   // Replace spaces with underscores
