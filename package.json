@@ -1,0 +1,43 @@
+{
+  "name": "osrs-item-data",
+  "version": "1.0.0",
+  "description": "TypeScript package for parsing OSRS item IDs and names with icon images from the Old School RuneScape Wiki",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc && npm run copy-data",
+    "copy-data": "mkdir -p dist/data && cp src/data/items.json dist/data/ 2>/dev/null || true",
+    "scrape": "tsx src/scraper/scrape.ts",
+    "test": "jest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "osrs",
+    "oldschool",
+    "runescape",
+    "items",
+    "wiki",
+    "parser"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.19",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^3.3.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/osrs-item-data.git"
+  }
+}
