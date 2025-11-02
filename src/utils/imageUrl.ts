@@ -25,7 +25,7 @@ export function constructImageFilename(
     const trimmedBase = baseName.trim();
     const trimmedVariant = variant?.trim();
 
-    if (trimmedVariant) {
+    if (trimmedVariant && includeVariant) {
       // Convert variant to lowercase for URL
       const lowerVariant = trimmedVariant.toLowerCase();
       // Add parentheses around variant (unless already has them)
