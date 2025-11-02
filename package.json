@@ -38,6 +38,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bingoscape/bingoscape-itemdata.git"
+    "url": "git+https://github.com/bingoscape/bingoscape-itemdata.git"
   }
 }
