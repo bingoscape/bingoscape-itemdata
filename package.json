@@ -38,6 +38,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/osrs-item-data.git"
+    "url": "https://github.com/bingoscape/bingoscape-itemdata.git"
   }
 }
